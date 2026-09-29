@@ -34,4 +34,18 @@ def log_event(event: str, level: str = "info", **fields) -> str:
         >>> log_event("ask_completed", user_id="sv01", cost_usd=0.0001)
         '{"event": "ask_completed", "level": "info", "timestamp": "...", ...}'
     """
+    #Tao dict su kien voi 3 truong mac dinh
+    events_log = {
+        "event": event,
+        "level": level.lower(),
+        "timestamp": utc_now_iso(),
+        **fields,
+    }
+
+    line = json.dumps(events_log, ensure_ascii=False) #giu nguyen ki tu Unicode goc
+
+    print(line, flush=True)
+
+    return line
+
     raise NotImplementedError("TODO (CP1): cài đặt log_event")
